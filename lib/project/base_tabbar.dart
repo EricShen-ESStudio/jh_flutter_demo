@@ -4,7 +4,7 @@
 ///  description: tabbar基类
 
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 import '/jh_common/utils/jh_image_utils.dart';
 import '/jh_common/widgets/base_refresh_view.dart';
@@ -28,7 +28,12 @@ class BaseTabBar extends StatefulWidget {
 
 class _BaseTabBarState extends State<BaseTabBar> {
   // int _currentIndex = 0;
-  final List<Widget> _pageList = const [OnePage(), TwoPage(), ThreePage(), FourPage()];
+  final List<Widget> _pageList = const [
+    OnePage(),
+    TwoPage(),
+    ThreePage(),
+    FourPage()
+  ];
 
   final PageController _pageController = PageController();
 
@@ -37,20 +42,23 @@ class _BaseTabBarState extends State<BaseTabBar> {
       BottomNavigationBarItem(
         label: '微信',
         icon: const JhAssetImage('tab/nav_tab_1', width: _iconWH),
-        activeIcon: JhAssetImage('tab/nav_tab_1_on', width: _iconWH, color: iconColor),
+        activeIcon:
+            JhAssetImage('tab/nav_tab_1_on', width: _iconWH, color: iconColor),
       ),
       BottomNavigationBarItem(
         label: '通讯录',
         icon: const JhAssetImage('tab/nav_tab_2', width: _iconWH),
-        activeIcon: JhAssetImage('tab/nav_tab_2_on', width: _iconWH, color: iconColor),
+        activeIcon:
+            JhAssetImage('tab/nav_tab_2_on', width: _iconWH, color: iconColor),
       ),
       BottomNavigationBarItem(
         label: '发现',
 //      icon: JhAssetImage('tab/nav_tab_3', width: _iconWH),
-        activeIcon: JhAssetImage('tab/nav_tab_3_on', width: _iconWH, color: iconColor),
-        icon: Badge(
+        activeIcon:
+            JhAssetImage('tab/nav_tab_3_on', width: _iconWH, color: iconColor),
+        icon: badges.Badge(
             padding: const EdgeInsets.all(4),
-            position: BadgePosition.topEnd(top: -4, end: -4),
+            position: badges.BadgePosition.topEnd(top: -4, end: -4),
             child: const JhAssetImage('tab/nav_tab_3', width: _iconWH)),
 //      activeIcon: Badge(
 //          padding: EdgeInsets.all(4),
@@ -60,7 +68,8 @@ class _BaseTabBarState extends State<BaseTabBar> {
       BottomNavigationBarItem(
         label: '我的',
         icon: const JhAssetImage('tab/nav_tab_4', width: _iconWH),
-        activeIcon: JhAssetImage('tab/nav_tab_4_on', width: _iconWH, color: iconColor),
+        activeIcon:
+            JhAssetImage('tab/nav_tab_4_on', width: _iconWH, color: iconColor),
       ),
     ];
   }
@@ -88,11 +97,14 @@ class _BaseTabBarState extends State<BaseTabBar> {
   _body() {
     // TODO: 通过ThemeProvider进行主题管理
     final provider = Provider.of<ThemeProvider>(context);
-    var bgColor = KColors.dynamicColor(context, KColors.kTabBarBgColor, KColors.kTabBarBgDarkColor);
-    var normalTextColor =
-        KColors.dynamicColor(context, KColors.kTabBarNormalTextColor, KColors.kTabBarNormalTextDarkColor);
-    var selectTextColor = KColors.dynamicColor(context, provider.getThemeColor(), KColors.kThemeColor);
-    var selectIconColor = KColors.dynamicColor(context, provider.getThemeColor(), KColors.kThemeColor);
+    var bgColor = KColors.dynamicColor(
+        context, KColors.kTabBarBgColor, KColors.kTabBarBgDarkColor);
+    var normalTextColor = KColors.dynamicColor(context,
+        KColors.kTabBarNormalTextColor, KColors.kTabBarNormalTextDarkColor);
+    var selectTextColor = KColors.dynamicColor(
+        context, provider.getThemeColor(), KColors.kThemeColor);
+    var selectIconColor = KColors.dynamicColor(
+        context, provider.getThemeColor(), KColors.kThemeColor);
 
     /// 保持页面状态的几种方式 https://blog.csdn.net/iotjin/article/details/126870716
     /// 如果需要在某个页面跳转返回到tabbar的指定页面，Provider create 添加到main.dart，否则写在BaseTabBar中
@@ -107,7 +119,8 @@ class _BaseTabBarState extends State<BaseTabBar> {
           controller: _pageController,
           children: _pageList,
         ),
-        bottomNavigationBar: Consumer<TabbarProvider>(builder: (_, provider, __) {
+        bottomNavigationBar:
+            Consumer<TabbarProvider>(builder: (_, provider, __) {
           return BottomNavigationBar(
             backgroundColor: bgColor,
             // 未选中颜色

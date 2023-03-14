@@ -29,7 +29,8 @@ const double _selectTextFontSize = 20.0;
 /// 单列选择器返回选中行对象和index
 /// 多列选择器返回选中行对象数组和index数组
 /// 时间选择器返回选中行时间（时间格式：2022-07-03 15:00:46）和index数组
-typedef _ClickCallBack = void Function(dynamic selectValue, dynamic selectIndexArr);
+typedef _ClickCallBack = void Function(
+    dynamic selectValue, dynamic selectIndexArr);
 
 enum PickerDateType {
   YMD, // y, m, d
@@ -76,8 +77,9 @@ class JhPickerTool {
           selecteds: [selectIndex],
           pickerType: PickerType.string,
           adapter: labelKey != null
-              ? PickerDataAdapter(pickerdata: data.map((e) => e[labelKey]).toList())
-              : PickerDataAdapter(pickerdata: data),
+              ? PickerDataAdapter(
+                  pickerData: data.map((e) => e[labelKey]).toList())
+              : PickerDataAdapter(pickerData: data),
           clickCallBack: clickCallBack,
         );
       },
@@ -116,11 +118,11 @@ class JhPickerTool {
           pickerType: PickerType.array,
           adapter: labelKey != null
               ? PickerDataAdapter(
-                  pickerdata: data.map((e) {
+                  pickerData: data.map((e) {
                     return e.map((e2) => e2[labelKey]).toList();
                   }).toList(),
                   isArray: true)
-              : PickerDataAdapter(pickerdata: data, isArray: true),
+              : PickerDataAdapter(pickerData: data, isArray: true),
           clickCallBack: clickCallBack,
         );
       },
@@ -220,13 +222,18 @@ class BasePickerViewState extends State<BasePickerView> {
   }
 
   _body() {
-    var bgColor = KColors.dynamicColor(context, KColors.kPickerBgColor, KColors.kPickerBgDarkColor);
-    var headerColor = KColors.dynamicColor(context, KColors.kPickerHeaderColor, KColors.kPickerHeaderDarkColor);
-    var headerLineColor =
-        KColors.dynamicColor(context, KColors.kPickerHeaderLineColor, KColors.kPickerHeaderLineDarkColor);
-    var titleColor = KColors.dynamicColor(context, KColors.kPickerTitleColor, KColors.kPickerTitleDarkColor);
-    var btnColor = KColors.dynamicColor(context, KColors.kPickerBtnColor, KColors.kPickerBtnDarkColor);
-    var selectTextColor = KColors.dynamicColor(context, KColors.kPickerTextColor, KColors.kPickerTextDarkColor);
+    var bgColor = KColors.dynamicColor(
+        context, KColors.kPickerBgColor, KColors.kPickerBgDarkColor);
+    var headerColor = KColors.dynamicColor(
+        context, KColors.kPickerHeaderColor, KColors.kPickerHeaderDarkColor);
+    var headerLineColor = KColors.dynamicColor(context,
+        KColors.kPickerHeaderLineColor, KColors.kPickerHeaderLineDarkColor);
+    var titleColor = KColors.dynamicColor(
+        context, KColors.kPickerTitleColor, KColors.kPickerTitleDarkColor);
+    var btnColor = KColors.dynamicColor(
+        context, KColors.kPickerBtnColor, KColors.kPickerBtnDarkColor);
+    var selectTextColor = KColors.dynamicColor(
+        context, KColors.kPickerTextColor, KColors.kPickerTextDarkColor);
     var selectItemBgColor = Colors.grey.withOpacity(0.15);
 
     var picker = Picker(
@@ -234,18 +241,23 @@ class BasePickerViewState extends State<BasePickerView> {
       selecteds: widget.selecteds,
       height: _kPickerHeight,
       itemExtent: _kItemHeight,
-      title: Text(widget.title ?? _titleNormalText, style: TextStyle(color: titleColor, fontSize: _kTitleFontSize)),
+      title: Text(widget.title ?? _titleNormalText,
+          style: TextStyle(color: titleColor, fontSize: _kTitleFontSize)),
       cancelText: _cancelText,
       cancelTextStyle: TextStyle(color: btnColor, fontSize: _kBtnFontSize),
       confirmText: _confirmText,
       confirmTextStyle: TextStyle(color: btnColor, fontSize: _kBtnFontSize),
       textAlign: TextAlign.center,
       textStyle: TextStyle(color: selectTextColor, fontSize: _textFontSize),
-      selectedTextStyle: TextStyle(color: selectTextColor, fontSize: _selectTextFontSize),
-      selectionOverlay: Container(height: _kItemHeight, color: selectItemBgColor),
+      selectedTextStyle:
+          TextStyle(color: selectTextColor, fontSize: _selectTextFontSize),
+      selectionOverlay:
+          Container(height: _kItemHeight, color: selectItemBgColor),
       backgroundColor: bgColor,
       headerDecoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: headerLineColor, width: _kHeaderLineHeight)),
+        border: Border(
+            bottom:
+                BorderSide(color: headerLineColor, width: _kHeaderLineHeight)),
       ),
       onConfirm: (Picker picker, List selectIndexArr) {
         if (widget.pickerType == PickerType.string) {
@@ -262,7 +274,8 @@ class BasePickerViewState extends State<BasePickerView> {
         }
         if (widget.pickerType == PickerType.date) {
           // var time = (picker.adapter as DateTimePickerAdapter).value;
-          widget.clickCallBack?.call(picker.adapter.text.split('.')[0], selectIndexArr);
+          widget.clickCallBack
+              ?.call(picker.adapter.text.split('.')[0], selectIndexArr);
         }
       },
     );
@@ -273,7 +286,8 @@ class BasePickerViewState extends State<BasePickerView> {
         topLeft: Radius.circular(_kHeaderRadius),
         topRight: Radius.circular(_kHeaderRadius),
       ),
-      child: Container(padding: const EdgeInsets.only(top: 5), child: picker.makePicker()),
+      child: Container(
+          padding: const EdgeInsets.only(top: 5), child: picker.makePicker()),
     );
   }
 }

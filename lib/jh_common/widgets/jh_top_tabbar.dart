@@ -4,7 +4,7 @@
 ///  description:  顶部分页效果的tabBar(类似新闻APP顶部切换效果)
 
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 import '/project/configs/colors.dart';
 import '/project/provider/theme_provider.dart';
@@ -19,7 +19,7 @@ import '/base_appbar.dart';
 class JhTopTabBarModel {
   final String? title; // 标题
   final Widget? widget; // 对应的widget
-  final Badge? badge; // 设置badge，不用设置title
+  final badges.Badge? badge; // 设置badge，不用设置title
 
   const JhTopTabBarModel({this.title, this.widget, this.badge});
 }
@@ -80,7 +80,8 @@ class JhTopTabBar extends StatefulWidget {
   State<JhTopTabBar> createState() => _JhTopTabBarState();
 }
 
-class _JhTopTabBarState extends State<JhTopTabBar> with SingleTickerProviderStateMixin {
+class _JhTopTabBarState extends State<JhTopTabBar>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   @override
@@ -88,12 +89,14 @@ class _JhTopTabBarState extends State<JhTopTabBar> with SingleTickerProviderStat
     // TODO: implement initState
     super.initState();
 
-    _tabController = TabController(length: widget.tabModelArr.length, vsync: this);
+    _tabController =
+        TabController(length: widget.tabModelArr.length, vsync: this);
     _tabController!.addListener(() {
 //      print(_tabController.index);
       if (widget.switchPageCallBack != null) {
 //          _tabController.indexIsChanging     监听不到滑动
-        if (_tabController!.index.toDouble() == _tabController!.animation!.value) {
+        if (_tabController!.index.toDouble() ==
+            _tabController!.animation!.value) {
           widget.switchPageCallBack!(_tabController!.index);
         }
       }
@@ -110,10 +113,14 @@ class _JhTopTabBarState extends State<JhTopTabBar> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     // TODO: 通过ThemeProvider进行主题管理
     final provider = Provider.of<ThemeProvider>(context);
-    var bgColor = KColors.dynamicColor(context, const Color(0xFFF2F2F2), KColors.kTabBarBgDarkColor); // 242
-    var indicatorColor = KColors.dynamicColor(context, provider.getThemeColor(), KColors.kThemeColor);
-    var labelColor = KColors.dynamicColor(context, provider.getThemeColor(), KColors.kThemeColor);
-    var unselectedLabelColor = KColors.dynamicColor(context, KColors.kBlackTextColor, KColors.kBlackTextDarkColor);
+    var bgColor = KColors.dynamicColor(
+        context, const Color(0xFFF2F2F2), KColors.kTabBarBgDarkColor); // 242
+    var indicatorColor = KColors.dynamicColor(
+        context, provider.getThemeColor(), KColors.kThemeColor);
+    var labelColor = KColors.dynamicColor(
+        context, provider.getThemeColor(), KColors.kThemeColor);
+    var unselectedLabelColor = KColors.dynamicColor(
+        context, KColors.kBlackTextColor, KColors.kBlackTextDarkColor);
     var centerLineColor = const Color(0xFFC8C8C8); // 200
 
     // 设置的颜色优先级高于暗黑模式
@@ -151,14 +158,17 @@ class _JhTopTabBarState extends State<JhTopTabBar> with SingleTickerProviderStat
                     labelStyle: widget.labelStyle,
                     unselectedLabelStyle: widget.unselectedLabelStyle,
                     indicator: widget.indicator,
-                    tabs: widget.tabModelArr.map((item) => Tab(text: item.title, icon: item.badge)).toList(),
+                    tabs: widget.tabModelArr
+                        .map((item) => Tab(text: item.title, icon: item.badge))
+                        .toList(),
                   ),
                 ),
               ),
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0, (widget.height - 20) / 2, 0, (widget.height - 20) / 2),
+                  padding: EdgeInsets.fromLTRB(
+                      0, (widget.height - 20) / 2, 0, (widget.height - 20) / 2),
                   child: Container(
                     color: centerLineColor,
                     height: widget.height - 20,

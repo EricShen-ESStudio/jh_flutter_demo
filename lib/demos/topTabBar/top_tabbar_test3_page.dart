@@ -1,6 +1,13 @@
+/*
+ * @Author: TYCandy
+ * @Date: 2023-03-14 21:04:34
+ * @LastEditors: TYCandy
+ * @LastEditTime: 2023-03-14 21:18:15
+ * @Description: file content
+ */
 // ignore_for_file: avoid_print
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badegs;
 import 'package:flutter/material.dart';
 import '/jh_common/widgets/jh_network_image.dart';
 import '/jh_common/widgets/jh_top_tabbar.dart';
@@ -23,17 +30,18 @@ class _TopTabBarTest3PageState extends State<TopTabBarTest3Page> {
       tabModelArr: [
         JhTopTabBarModel(
             widget: const HomeContent(),
-            badge: Badge(
+            badge: badegs.Badge(
               toAnimate: false,
-              position: BadgePosition.topEnd(top: -5, end: -20),
+              position: badegs.BadgePosition.topEnd(top: -5, end: -20),
               child: const Text('标题一'),
             )),
         JhTopTabBarModel(
             widget: const HomeContent(),
-            badge: Badge(
+            badge: badegs.Badge(
               toAnimate: false,
-              position: BadgePosition.topEnd(top: -12, end: -20),
-              badgeContent: Text(_count.toString(), style: const TextStyle(color: Colors.white, fontSize: 10)),
+              position: badegs.BadgePosition.topEnd(top: -12, end: -20),
+              badgeContent: Text(_count.toString(),
+                  style: const TextStyle(color: Colors.white, fontSize: 10)),
               child: const Text('标题二'),
             )),
       ],
@@ -70,7 +78,8 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(itemCount: listData.length, itemBuilder: _getListData);
+    return ListView.builder(
+        itemCount: listData.length, itemBuilder: _getListData);
   }
 }
 

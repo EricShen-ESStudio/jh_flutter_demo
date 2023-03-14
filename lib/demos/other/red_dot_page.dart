@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badegs;
 import '/base_appbar.dart';
 
 class RedDotPage extends StatefulWidget {
@@ -23,31 +23,35 @@ class _RedDotPageState extends State<RedDotPage> {
           bottomNavigationBar: _bottomNavigationBar(),
           appBar: BaseAppBar(
             '小红点',
-            bottomWidget: PreferredSize(preferredSize: Size.fromHeight(_rowHeight), child: _tabBar()),
+            bottomWidget: PreferredSize(
+                preferredSize: Size.fromHeight(_rowHeight), child: _tabBar()),
 //            elevation: 3,
           ),
           body: Column(
             children: <Widget>[
               const SizedBox(height: 15),
-              Badge(
+              badegs.Badge(
                 badgeContent: const Text('3'),
                 child: const Icon(Icons.settings),
               ),
               const SizedBox(height: 15),
-              Badge(child: const Icon(Icons.settings)),
+              badegs.Badge(child: const Icon(Icons.settings)),
               const SizedBox(height: 15),
-              Badge(
+              badegs.Badge(
                 showBadge: false,
                 child: const Icon(Icons.settings),
               ),
               const SizedBox(height: 15),
-              Badge(
-                shape: BadgeShape.square,
+              badegs.Badge(
+                shape: badegs.BadgeShape.square,
                 borderRadius: BorderRadius.circular(5),
-                position: BadgePosition.topEnd(top: -12, end: -20),
+                position: badegs.BadgePosition.topEnd(top: -12, end: -20),
                 padding: const EdgeInsets.all(2),
-                badgeContent:
-                    const Text('New', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                badgeContent: const Text('New',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold)),
                 child: Text('MUSIC', style: TextStyle(color: Colors.grey[600])),
               ),
             ],
@@ -67,9 +71,9 @@ class _RedDotPageState extends State<RedDotPage> {
         ),
         BottomNavigationBarItem(
           label: 'Messages',
-          icon: Badge(
+          icon: badegs.Badge(
             toAnimate: false,
-            position: BadgePosition.topEnd(top: -20, end: -20),
+            position: badegs.BadgePosition.topEnd(top: -20, end: -20),
             badgeContent: Text(
               _count.toString(),
               style: const TextStyle(color: Colors.white, fontSize: 12),
@@ -79,13 +83,14 @@ class _RedDotPageState extends State<RedDotPage> {
         ),
         BottomNavigationBarItem(
           label: 'Settings',
-          icon: Badge(
-            shape: BadgeShape.circle,
+          icon: badegs.Badge(
+            shape: badegs.BadgeShape.circle,
             borderRadius: BorderRadius.circular(100),
             badgeContent: Container(
               height: 5,
               width: 5,
-              decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle, color: Colors.white),
             ),
             child: const Icon(Icons.settings),
           ),
@@ -109,21 +114,27 @@ class _RedDotPageState extends State<RedDotPage> {
         child: TabBar(
           tabs: [
             Tab(
-              icon: Badge(
+              icon: badegs.Badge(
                 badgeColor: Colors.blue,
-                badgeContent: const Text('3', style: TextStyle(color: Colors.red)),
-                child: const Icon(Icons.account_balance_wallet, color: Colors.white),
+                badgeContent:
+                    const Text('3', style: TextStyle(color: Colors.red)),
+                child: const Icon(Icons.account_balance_wallet,
+                    color: Colors.white),
               ),
             ),
             Tab(
-              icon: Badge(
-                shape: BadgeShape.square,
+              icon: badegs.Badge(
+                shape: badegs.BadgeShape.square,
                 borderRadius: BorderRadius.circular(5),
-                position: BadgePosition.topEnd(top: -12, end: -20),
+                position: badegs.BadgePosition.topEnd(top: -12, end: -20),
                 padding: const EdgeInsets.all(2),
-                badgeContent:
-                    const Text('NEW', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
-                child: const Text('MUSIC', style: TextStyle(color: Colors.white)),
+                badgeContent: const Text('NEW',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold)),
+                child:
+                    const Text('MUSIC', style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
